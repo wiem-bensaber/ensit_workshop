@@ -1,10 +1,5 @@
 name: Node.js CI with Docker Build and Push (macOS M1)
 
-on:
-  push:
-    branches:
-      - main
-
 jobs:
   build-and-push-docker-image:
     runs-on: macos-latest
