@@ -16,10 +16,20 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: 18  # Change this to your Node.js version
+        node-version: 14  # Change this to your desired Node.js version
 
     - name: Install dependencies
       run: npm install
 
     - name: Run tests
       run: npm test
+
+    - name: Build and Push Docker Image
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      run: |
+        docker build -t your-docker-image-name:your-tag .
+        docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+        docker push your-docker-image-name:your-tag
+
