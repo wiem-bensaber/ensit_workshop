@@ -26,10 +26,10 @@ jobs:
 
     - name: Build and Push Docker Image
       env:
-        DOCKER_USERNAME: ${{ wiembensaber }}
-        DOCKER_PASSWORD: ${{ Newme*2022 }}
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME  }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       run: |
         docker build -t wiembensaber/integration-week:work_shop .
-        docker login -u $wiembensaber -p $Newme*2022
+        docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
         docker push wiembensaber/integration-week:work_shop
 
