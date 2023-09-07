@@ -1,19 +1,41 @@
-name: Publish image to Docker Hub
+name: Node.js CI with Docker Build and Push
 
-on: 
-  [ workflow_dispatch ]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
-  publish_image:
+  build-and-push:
     runs-on: ubuntu-latest
+
     steps:
-      - name: checkout
-        uses: actions/checkout@v3
-      - name: build
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18  # Change this to your Node.js version
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build and Push Docker Image
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_HUB_TOKEN }}
         run: |
+          # Build the Docker image
           docker build . -t wiembensaber/integration-week/docker-image:latest
-      - name: publish
-        run: |
-          docker login -u wiembensaber -p ${{ secrets-DOCKER_HUB_TOKEN }}
+
+          # Log in to Docker Hub
+          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+
+          # Push the Docker image to Docker Hub
           docker push wiembensaber/integration-week/docker-image:latest
+
         
