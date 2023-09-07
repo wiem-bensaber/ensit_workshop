@@ -1,7 +1,6 @@
 name: Node.js CI with Docker Build and Push
 
-on: 
-  [workflow_dispatch]
+on: [ push ]
 
 jobs:
   build-and-push:
