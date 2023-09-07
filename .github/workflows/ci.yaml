@@ -33,6 +33,6 @@ jobs:
           docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
           # Push the Docker image to Docker Hub
-          docker push wiembensaber/integration-week/docker-image:latest
+          docker push docker.io/wiembensaber/integration-week/docker-image:latest
 
         
