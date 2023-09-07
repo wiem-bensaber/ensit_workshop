@@ -27,7 +27,7 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_HUB_TOKEN }}
         run: |
           # Build the Docker image
-          docker build . -t docker-image:latest
+          docker build . -t wiembensaber/integration-week/docker-image:latest
 
           # Log in to Docker Hub
           docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
