@@ -27,12 +27,12 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_HUB_TOKEN }}
         run: |
           # Build the Docker image
-          docker build -t docker-image .
+          docker build -t wiembensaber/integration-week:dockerimage .
 
           # Log in to Docker Hub
           docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
           # Push the Docker image to Docker Hub
-          docker push wiembensaber/integration-week:docker-image
+          docker push wiembensaber/integration-week:dockerimage
 
         
